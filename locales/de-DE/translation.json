@@ -1,0 +1,51 @@
+{
+  "toolbar": {
+    "menu": {
+      "about": "Was ist Planning Poker?",
+      "guide": "Anleitung",
+      "examples": "Beispiele",
+      "newSession": "Neue Sitzung",
+      "joinSession": "Sitzung beitreten"
+    }
+  },
+  "HomePage": {
+    "heroSection": {
+      "title": "Kostenlose Planning Poker App",
+      "description": "Kostenlose/Open-Source Planning Poker Web-App zur Schätzung von User Stories für Ihre Agile/Scrum-Teams. Erstellen Sie eine Sitzung und laden Sie Ihre Teammitglieder ein, um User Stories effizient zu schätzen."
+    }
+  },
+  "GameController": {
+    "autoReveal": "Automatisch aufdecken",
+    "average": "Durchschnitt",
+    "reveal": "Aufdecken",
+    "restart": "Neustarten",
+    "delete": "Löschen",
+    "exit": "Beenden",
+    "invite": "Einladen",
+    "storyName": "Story-Name",
+    "enterStoryName": "Story-Name oder Nummer eingeben",
+    "inviteLinkCopied": "Einladungslink in die Zwischenablage kopiert",
+    "areYouSureDelete": "Sind Sie sicher? Dadurch wird diese Sitzung gelöscht und alle Spieler werden entfernt.",
+    "inProgress": "In Bearbeitung",
+    "finished": "Abgeschlossen"
+  },
+  "CardPicker": {
+    "ClickOnTheCardToVote": "Klicken Sie auf die Karte, um abzustimmen",
+    "SessionNotReadyForVotingWaitForModeratorToStart": "Sitzung nicht zum Abstimmen bereit! Bitte warten Sie, bis der Moderator startet"
+  },
+  "CreateGame": {
+    "newSessionHeader": "Neue Sitzung erstellen",
+    "sessionNameLabel": "Sitzungsname",
+    "yourNameLabel": "Ihr Name",
+    "sessionSizingType": "Sitzungsgrößentyp",
+    "fibonacci": "Fibonacci (0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89)",
+    "shortFibonacci": "Kurze Fibonacci (0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100)",
+    "tShirt": "T-Shirt (XXS, XS, S, M, L, XL, XXL)",
+    "tShirtAndNumber": "T-Shirt & Zahlen (S, M, L, XL, 1, 2, 3, 4, 5)",
+    "custom": "Benutzerdefiniert",
+    "pleaseEnterValues": "Bitte geben Sie Werte für mindestens zwei benutzerdefinierte Optionen ein.",
+    "allowMembersToManageSession": "Mitgliedern erlauben, die Sitzung zu verwalten",
+    "creating": "Erstelle...",
+    "create": "Erstellen"
+  }
+}
