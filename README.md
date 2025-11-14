@@ -24,12 +24,22 @@ A real-time Planning Poker application built with React and Supabase.
 2. Copy the contents of supabase-schema.sql
 3. Paste and run it in the SQL Editor
 
-### 3. Configure Environment Variables
-1. Copy .env.example to .env
+### 3. Clone Repository
+1. Repo https://github.com/pankaj9057/planning-poker.git
+
+### 4. Configure Environment Variables
+1. Create .env on root (Planning-Poker)
 2. Get your Supabase URL and anon key from Project Settings → API
 3. Update the .env file with your credentials
 
-### 4. Install and Run
+Example:
+
+```
+VITE_SUPABASE_URL=https://xyzcompany.supabase.co
+VITE_SUPABASE_ANON_KEY=public-anon-key
+```
+
+### 5. Install and Run
 ```bash
 npm install
 npm run dev
@@ -65,49 +75,3 @@ Live demo: https://pankaj9057.github.io/planning-poker/
    <img src="./public/screenshot-1.png" alt="screenshot-1" width="48%" style="margin-right:2%" />
    <img src="./public/screenshot.png" alt="screenshot-2" width="48%" />
 </p>
-
-## Quick start
-
-1. Install dependencies
-
-```bash
-npm install
-```
-
-2. Create a local `.env` and set the following values:
-
-- VITE_SUPABASE_URL
-- VITE_SUPABASE_ANON_KEY
-
-Example (do not commit):
-
-```
-VITE_SUPABASE_URL=https://xyzcompany.supabase.co
-VITE_SUPABASE_ANON_KEY=public-anon-key
-```
-
-3. Run the dev server
-
-```bash
-npm run dev
-```
-
-Open http://localhost:5173
-
-## Build
-
-To build a production artifact:
-
-```bash
-npm run build
-```
-
-The optimized static output will be in the `dist/` folder.
-
-## Deployment options
-
-This project supports several static-hosting providers. The repository already contains a GitHub Actions workflow that deploys the `dist` artifact to GitHub Pages (using `actions/upload-pages-artifact` + `actions/deploy-pages`).
-
-- Vercel: import the repo and add the two environment variables.
-- Netlify: import the repo, set build command to `npm run build` and publish directory to `dist`, and add the environment variables.
-- GitHub Pages: CI workflow in `.github/workflows/deploy.yml` will publish on push to `main`.
