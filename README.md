@@ -112,6 +112,60 @@ This project supports several static-hosting providers. The repository already c
 - Netlify: import the repo, set build command to `npm run build` and publish directory to `dist`, and add the environment variables.
 - GitHub Pages: CI workflow in `.github/workflows/deploy.yml` will publish on push to `main`.
 
+# Planning Poker (Supabase + Vite + React)
+
+A lightweight Planning Poker web app built with React, Vite and Supabase for realtime features.
+
+Live demo: https://pankaj9057.github.io/planning-poker/
+
+![screenshot](./public/screenshot.png)
+
+## Quick start
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Create a local `.env` (see `.env.example` if present) and set the following values:
+
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_ANON_KEY
+
+Example (do not commit):
+
+```
+VITE_SUPABASE_URL=https://xyzcompany.supabase.co
+VITE_SUPABASE_ANON_KEY=public-anon-key
+```
+
+3. Run the dev server
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173
+
+## Build
+
+To build a production artifact:
+
+```bash
+npm run build
+```
+
+The optimized static output will be in the `dist/` folder.
+
+## Deployment options
+
+This project supports several static-hosting providers. The repository already contains a GitHub Actions workflow that deploys the `dist` artifact to GitHub Pages (using `actions/upload-pages-artifact` + `actions/deploy-pages`).
+
+- Vercel: import the repo and add the two environment variables.
+- Netlify: import the repo, set build command to `npm run build` and publish directory to `dist`, and add the environment variables.
+- GitHub Pages: CI workflow in `.github/workflows/deploy.yml` will publish on push to `main`.
+
 ## Environment variables
 
 Required (for local dev and CI build):
