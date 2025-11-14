@@ -24,16 +24,12 @@ A real-time Planning Poker application built with React and Supabase.
 2. Copy the contents of supabase-schema.sql
 3. Paste and run it in the SQL Editor
 
-### 3. Enable Anonymous Authentication
-1. Go to Authentication → Providers in your Supabase dashboard
-2. Enable Anonymous sign-ins
-
-### 4. Configure Environment Variables
+### 3. Configure Environment Variables
 1. Copy .env.example to .env
 2. Get your Supabase URL and anon key from Project Settings → API
 3. Update the .env file with your credentials
 
-### 5. Install and Run
+### 4. Install and Run
 ```bash
 npm install
 npm run dev
@@ -60,61 +56,8 @@ npm run dev
 2. Click "Add new site" → "Import an existing project"
 3. Connect to GitHub and select `pankaj9057/planning-poker`
 4. Build settings are auto-detected from `netlify.toml`
-# Planning Poker (Supabase + Vite + React)
 
-A lightweight Planning Poker web app built with React, Vite and Supabase for realtime features.
-
-This README has been refreshed. It contains concise, actionable instructions to run, build, and deploy the project.
-
-## Quick start
-
-1. Install dependencies
-
-```bash
-npm install
-```
-
-2. Create a local `.env` (see `.env.example` if present) and set the following values:
-
-- VITE_SUPABASE_URL
-- VITE_SUPABASE_ANON_KEY
-
-Example (do not commit):
-
-```
-VITE_SUPABASE_URL=https://xyzcompany.supabase.co
-VITE_SUPABASE_ANON_KEY=public-anon-key
-```
-
-3. Run the dev server
-
-```bash
-npm run dev
-```
-
-Open http://localhost:5173
-
-## Build
-
-To build a production artifact:
-
-```bash
-npm run build
-```
-
-The optimized static output will be in the `dist/` folder.
-
-## Deployment options
-
-This project supports several static-hosting providers. The repository already contains a GitHub Actions workflow that deploys the `dist` artifact to GitHub Pages (using `actions/upload-pages-artifact` + `actions/deploy-pages`).
-
-- Vercel: import the repo and add the two environment variables.
-- Netlify: import the repo, set build command to `npm run build` and publish directory to `dist`, and add the environment variables.
-- GitHub Pages: CI workflow in `.github/workflows/deploy.yml` will publish on push to `main`.
-
-# Planning Poker (Supabase + Vite + React)
-
-A lightweight Planning Poker web app built with React, Vite and Supabase for realtime features.
+# Demo
 
 Live demo: https://pankaj9057.github.io/planning-poker/
 
@@ -131,7 +74,7 @@ Live demo: https://pankaj9057.github.io/planning-poker/
 npm install
 ```
 
-2. Create a local `.env` (see `.env.example` if present) and set the following values:
+2. Create a local `.env` and set the following values:
 
 - VITE_SUPABASE_URL
 - VITE_SUPABASE_ANON_KEY
@@ -168,22 +111,3 @@ This project supports several static-hosting providers. The repository already c
 - Vercel: import the repo and add the two environment variables.
 - Netlify: import the repo, set build command to `npm run build` and publish directory to `dist`, and add the environment variables.
 - GitHub Pages: CI workflow in `.github/workflows/deploy.yml` will publish on push to `main`.
-
-## Environment variables
-
-Required (for local dev and CI build):
-
-- `VITE_SUPABASE_URL` — your Supabase project URL
-- `VITE_SUPABASE_ANON_KEY` — your Supabase anonymous public key
-
-Set these in your hosting provider or GitHub repository secrets for CI.
-
-## Contributing
-
-- Follow the existing TypeScript and linting rules.
-- Run `npm run lint` before opening a PR.
-
-## Troubleshooting
-
-- If the dev server won't start, ensure Node 20+ and an up-to-date npm are installed.
-- If you see missing env variables, verify they are set in `.env` or in your CI environment.
