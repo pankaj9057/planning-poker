@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Environment files
+# Local environment files (do NOT commit secrets)
+.env
+.env.*
+
+# Visual Studio and editor folders
+.vs/
+.vscode/
+.idea/
+
+# Builds and output
+dist/
+build/
+out/
+.vite/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+.parcel-cache/
+.cache/
+/.firebase/
+/.turbo/
+
