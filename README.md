@@ -118,8 +118,10 @@ A lightweight Planning Poker web app built with React, Vite and Supabase for rea
 
 Live demo: https://pankaj9057.github.io/planning-poker/
 
-![screenshot](./public/screenshot-1.png)
-![screenshot](./public/screenshot.png)
+<p align="center">
+   <img src="./public/screenshot-1.png" alt="screenshot-1" width="48%" style="margin-right:2%" />
+   <img src="./public/screenshot.png" alt="screenshot-2" width="48%" />
+</p>
 
 ## Quick start
 
