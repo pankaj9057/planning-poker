@@ -118,6 +118,7 @@ A lightweight Planning Poker web app built with React, Vite and Supabase for rea
 
 Live demo: https://pankaj9057.github.io/planning-poker/
 
+![screenshot](./public/screenshot-1.png)
 ![screenshot](./public/screenshot.png)
 
 ## Quick start
@@ -184,10 +185,3 @@ Set these in your hosting provider or GitHub repository secrets for CI.
 
 - If the dev server won't start, ensure Node 20+ and an up-to-date npm are installed.
 - If you see missing env variables, verify they are set in `.env` or in your CI environment.
-
----
-
-If you'd like, I can also:
-- Add a small `.env.example` if one is missing.
-- Update `netlify.toml` or `vercel.json` to match any specific build settings.
-- Commit the README and push to a branch for review.
