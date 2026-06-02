@@ -4,6 +4,10 @@ node_modules/
 # Environment files
 # Local environment files (do NOT commit secrets)
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 .env.*
 
 # Visual Studio and editor folders
@@ -41,4 +45,5 @@ Thumbs.db
 .cache/
 /.firebase/
 /.turbo/
+.eslintcache
 

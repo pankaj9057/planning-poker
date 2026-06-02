@@ -5,6 +5,7 @@ import { GameStatus, LANGUAGES } from '../constants';
 import { CardPicker } from '../components/CardPicker';
 import { PlayerList } from '../components/PlayerList';
 import { MessageBox } from '../components/MessageBox';
+import { QRCodeModal } from '../components/QRCodeModal';
 
 interface GameSessionProps {
   state: {
@@ -41,6 +42,7 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
   const { vote, revealVotes, resetRound, statusMessage, clearStatus } = actions;
   const [copyStatus, setCopyStatus] = useState(t('COPY_LINK'));
   const [showLangMenu, setShowLangMenu] = useState(false);
+  const [showQRModal, setShowQRModal] = useState(false);
 
   if (loading) return <div className="text-center p-8 text-gray-500 dark:text-gray-400">Loading Game...</div>;
   if (error || !game) return <div className="text-center p-8 text-red-500">Error: {error || 'Game data missing.'}</div>;
@@ -48,9 +50,10 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
   const isRevealed = game.game_status === GameStatus.FINISHED;
   const revealProgress = totalPlayers > 0 ? (finishedCount / totalPlayers) * 100 : 0;
   const averageDisplay = isRevealed ? (game.average === null ? t('NO_VOTES') : game.average) : '...';
+  const joinUrl = `${window.location.origin}${window.location.pathname}?gameId=${game.id}`;
 
   const handleCopyLink = async () => {
-    const joinUrl = `${window.location.origin}${window.location.pathname}?gameId=${game.id}`;
+    setShowQRModal(true);
     try {
       await navigator.clipboard.writeText(joinUrl);
       setCopyStatus(t('COPIED'));
@@ -233,6 +236,12 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
 
       </div>
       <MessageBox message={statusMessage.text} type={statusMessage.type} onClose={clearStatus} />
+      {showQRModal && (
+        <QRCodeModal
+          url={joinUrl}
+          onClose={() => setShowQRModal(false)}
+        />
+      )}
     </div>
   );
 };
