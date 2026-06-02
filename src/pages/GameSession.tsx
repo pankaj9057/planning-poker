@@ -84,29 +84,38 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8 bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+    <div className="min-h-screen p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] text-slate-800 dark:text-slate-100 transition-colors duration-500 animate-fade-in">
       <div className="max-w-7xl mx-auto">
-        {/* Header and Controls */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-indigo-600 dark:text-indigo-400">{t('APP_TITLE')}</h1>
+        
+        {/* Top Navigation */}
+        <header className="flex justify-between items-center py-4 mb-6">
+          <div className="flex items-center space-x-2">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+              <span className="font-heading font-black text-white text-base">P</span>
+            </div>
+            <span className="font-heading font-black text-lg md:text-xl bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">
+              Planning Poker
+            </span>
+          </div>
+
           <div className="flex items-center space-x-3">
             {/* Language Picker */}
             <div className="relative">
               <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
-                className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                className="p-2.5 px-4 rounded-xl glass-card text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-md hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1.5 font-heading font-semibold text-sm cursor-pointer"
                 title="Change Language"
               >
                 {LANGUAGES[lang]}
-                {showLangMenu ? <ChevronUp className="w-4 h-4 inline ml-1" /> : <ChevronDown className="w-4 h-4 inline ml-1" />}
+                {showLangMenu ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
               {showLangMenu && (
-                <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 z-10">
+                <div className="absolute right-0 mt-2 w-40 rounded-xl shadow-2xl glass-card border border-slate-200/50 dark:border-slate-800/50 z-20 overflow-hidden animate-fade-in">
                   {Object.entries(LANGUAGES).map(([key, name]) => (
                     <button
                       key={key}
                       onClick={() => handleLangSelect(key as Language)}
-                      className={`block w-full text-left px-4 py-2 text-sm hover:bg-indigo-500 hover:text-white rounded-md ${key === lang ? 'bg-indigo-100 dark:bg-indigo-600' : ''}`}
+                      className={`block w-full text-left px-4 py-2.5 text-sm font-medium hover:bg-gradient-to-r hover:from-indigo-600 hover:to-violet-600 hover:text-white transition-colors duration-150 ${key === lang ? 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-300'}`}
                     >
                       {name}
                     </button>
@@ -117,34 +126,41 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
             {/* Back to Home */}
             <button
               onClick={() => setView('home')}
-              className="p-2 px-4 rounded-full bg-indigo-500 text-white shadow hover:bg-indigo-600 transition text-sm"
+              className="p-2.5 px-4 rounded-xl glass-card hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-200 shadow-md font-heading font-semibold text-sm hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
               title={t('BACK_TO_HOME')}
             >
               {t('BACK_TO_HOME')}
             </button>
           </div>
-        </div>
+        </header>
 
-        {/* Game Info and Moderation */}
-        <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-2xl mb-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <h2 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{game.name}</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                {t('GAME_CREATED_BY')}: {game.created_by_name} (<span className="text-xs">{game.created_by_id.substring(0, 8)}...</span>)
+        {/* Game Board & Statistics */}
+        <div className="glass-panel rounded-[32px] p-6 md:p-8 shadow-2xl mb-8 border border-white/60 dark:border-slate-800/40 relative overflow-hidden">
+          <div className="absolute -top-24 -left-24 w-48 h-48 rounded-full bg-indigo-500/5 dark:bg-indigo-500/2 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-48 h-48 rounded-full bg-violet-500/5 dark:bg-violet-500/2 blur-3xl pointer-events-none" />
+
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-1">
+              <div className="flex items-center space-x-3 flex-wrap gap-y-2">
+                <h2 className="text-2xl md:text-3xl font-heading font-black text-slate-800 dark:text-white">{game.name}</h2>
+                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${isRevealed ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25' : 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25'}`}>
+                  {t(`${game.game_status.toUpperCase()}`)}
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 dark:text-slate-500">
+                {t('GAME_CREATED_BY')}: <span className="font-semibold text-slate-500 dark:text-slate-400">{game.created_by_name}</span> (<span className="font-mono">{game.created_by_id.substring(0, 8)}...</span>)
               </p>
+              
               {game.story_name && (
-                <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                  <LinkIcon className="w-4 h-4 inline mr-1" /> {game.story_name}
-                </p>
+                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-500/10 dark:bg-indigo-500/5 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 dark:border-indigo-500/10 rounded-2xl font-heading font-semibold text-sm">
+                  <LinkIcon className="w-4 h-4 shrink-0" />
+                  <span>{game.story_name}</span>
+                </div>
               )}
-              <p className={`font-semibold mt-1 ${isRevealed ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'}`}>
-                Status: {t(`${game.game_status.toUpperCase()}`)}
-              </p>
             </div>
 
             {/* Moderation Actions */}
-            <div className="flex flex-col space-y-2">
+            <div className="flex items-center gap-3 shrink-0">
               {canReveal && (
                 <button
                   type="button"
@@ -155,11 +171,11 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
                       console.error('Reveal action failed:', err);
                     }
                   }}
-                  className="flex items-center justify-center bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition shadow-md disabled:opacity-50"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 px-5 py-3 rounded-xl font-heading font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
                   disabled={!canReveal}
                   title={!canReveal ? t('NOT_AUTHORIZED') : ''}
                 >
-                  <Zap className="w-5 h-5 mr-2" /> {t('REVEAL')}
+                  <Zap className="w-4.5 h-4.5 mr-2" /> {t('REVEAL')}
                 </button>
               )}
               {canReset && (
@@ -172,39 +188,49 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
                       console.error('Reset action failed:', err);
                     }
                   }}
-                  className="flex items-center justify-center bg-amber-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-amber-600 transition shadow-md disabled:opacity-50"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 px-5 py-3 rounded-xl font-heading font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
                   disabled={!canReset}
                   title={!canReset ? t('NOT_AUTHORIZED') : ''}
                 >
-                  <RotateCw className="w-5 h-5 mr-2" /> {t('RESET_ROUND')}
+                  <RotateCw className="w-4.5 h-4.5 mr-2 animate-spin-slow" /> {t('RESET_ROUND')}
                 </button>
               )}
             </div>
           </div>
 
-          {/* Progress and Average Display */}
-          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-800 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-indigo-50 dark:bg-gray-800 p-4 rounded-lg">
-              <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">{t('AVERAGE')}</p>
-              <p className="text-3xl font-extrabold mt-1">{averageDisplay}</p>
+          {/* Progress and Average Display Cards */}
+          <div className="mt-8 pt-6 border-t border-slate-200/50 dark:border-slate-800/40 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className={`p-5 rounded-2xl transition-all duration-500 border ${isRevealed ? 'bg-gradient-to-br from-indigo-500/10 to-violet-500/15 border-indigo-500/20 shadow-lg shadow-indigo-500/5' : 'bg-slate-500/5 border-slate-500/10'}`}>
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">{t('AVERAGE')}</p>
+              <div className="flex items-baseline space-x-2 mt-2">
+                <span className={`text-4xl font-heading font-black tracking-tight ${isRevealed ? 'bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent animate-pulse-glow' : 'text-slate-300 dark:text-slate-700'}`}>
+                  {averageDisplay}
+                </span>
+                {isRevealed && <span className="text-xs text-slate-400 dark:text-slate-500 font-semibold font-heading">points</span>}
+              </div>
             </div>
-            <div className="bg-indigo-50 dark:bg-gray-800 p-4 rounded-lg">
-              <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">Vote Progress</p>
-              <div className="flex items-center mt-1">
-                <span className="text-2xl font-extrabold">{finishedCount}/{totalPlayers}</span>
-                <div className="flex-1 h-3 ml-3 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                  <div
-                    className="h-full bg-indigo-500 transition-all duration-500"
-                    style={{ width: `${revealProgress}%` }}
-                  ></div>
-                </div>
+            
+            <div className="p-5 rounded-2xl bg-slate-500/5 border border-slate-500/10">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Vote Progress</p>
+              <div className="flex items-center justify-between mt-3">
+                <span className="text-3xl font-heading font-black text-slate-700 dark:text-slate-200">{finishedCount}/{totalPlayers}</span>
+                <span className="text-xs font-semibold px-2 py-0.5 bg-slate-100 dark:bg-slate-900 rounded-lg text-slate-400">{Math.round(revealProgress)}%</span>
+              </div>
+              <div className="h-2.5 w-full bg-slate-200 dark:bg-slate-900 rounded-full mt-3 overflow-hidden border border-slate-200/50 dark:border-slate-800/50">
+                <div
+                  className="h-full bg-gradient-to-r from-indigo-50 to-violet-50 shadow-[0_0_8px_rgba(99,102,241,0.5)] transition-all duration-500"
+                  style={{ 
+                    width: `${revealProgress}%`, 
+                    backgroundImage: 'linear-gradient(90deg, var(--color-indigo-500) 0%, var(--color-violet-500) 100%)'
+                  }}
+                />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main Grid Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           {/* Player List */}
           <div className="lg:col-span-1 order-2 lg:order-1">
             <PlayerList players={players} game={game} t={t} playerId={currentPlayer?.id || null} />
@@ -221,18 +247,19 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
           </div>
         </div>
 
-        {/* Footer actions */}
-        <div className="mt-6 flex justify-between">
+        {/* Footer controls */}
+        <footer className="mt-8 pt-6 border-t border-slate-200/20 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <button
             onClick={handleCopyLink}
-            className="flex items-center bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg text-sm hover:bg-gray-400 dark:hover:bg-gray-600 transition"
+            className="inline-flex items-center px-4 py-2.5 rounded-xl glass-card text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-md font-heading font-semibold text-xs transition-all duration-200 hover:-translate-y-0.5 active:scale-95 cursor-pointer"
           >
             <LinkIcon className="w-4 h-4 mr-2" /> {copyStatus}
           </button>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-            Game ID: <span className="font-mono text-xs">{game.id}</span>
-          </p>
-        </div>
+          
+          <div className="inline-flex items-center px-4 py-2 bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800/40 rounded-xl text-slate-400 font-mono text-[10px] select-all">
+            Game ID: <span className="font-semibold text-slate-500 dark:text-slate-400 ml-1.5">{game.id}</span>
+          </div>
+        </footer>
 
       </div>
       <MessageBox message={statusMessage.text} type={statusMessage.type} onClose={clearStatus} />
@@ -245,3 +272,4 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
     </div>
   );
 };
+

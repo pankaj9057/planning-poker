@@ -43,17 +43,27 @@ export const CardPicker = ({ game, playerId, vote, currentPlayer }: CardPickerPr
   const deck = game?.cards || DECK_FIBONACCI;
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 p-4 md:p-6 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-inner">
-      {deck.map(card => (
-        <Card
-          key={card}
-          value={card}
-          isSelected={selectedCard === card && isFinished}
-          onClick={() => handleCardClick(card)}
-          isRevealed={isGameRevealed}
-          isDisabled={isGameRevealed}
-        />
-      ))}
+    <div className="glass-panel rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-300">
+      <div className="text-center mb-6">
+        <h3 className="text-lg md:text-xl font-heading font-bold text-slate-700 dark:text-slate-200">
+          {isGameRevealed ? 'Round Finished' : 'Select Your Vote'}
+        </h3>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+          {isGameRevealed ? 'The average score has been calculated.' : 'Hover and click a card to cast your estimate.'}
+        </p>
+      </div>
+      <div className="flex flex-wrap justify-center gap-4 md:gap-5">
+        {deck.map(card => (
+          <Card
+            key={card}
+            value={card}
+            isSelected={selectedCard === card && isFinished}
+            onClick={() => handleCardClick(card)}
+            isRevealed={isGameRevealed}
+            isDisabled={isGameRevealed}
+          />
+        ))}
+      </div>
     </div>
   );
 };
