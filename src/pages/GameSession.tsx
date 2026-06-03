@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Header } from '../components/Header';
 import { Link as LinkIcon, Zap, RotateCw, ChevronDown, ChevronUp } from 'lucide-react';
 import type { Game, Player, Language } from '../types';
 import { GameStatus, LANGUAGES } from '../constants';
@@ -32,12 +33,14 @@ interface GameSessionProps {
   t: (key: string) => string;
   lang: Language;
   setLanguage: (lang: Language) => void;
+  toggleTheme: () => void;
+  theme: string;
 }
 
 /**
  * GameSession component displays the active game interface.
  */
-export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: GameSessionProps) => {
+export const GameSession = ({ state, actions, setView, t, lang, setLanguage, toggleTheme, theme }: GameSessionProps) => {
   const { game, players, currentPlayer, loading, error, finishedCount, totalPlayers, canReveal, canReset } = state;
   const { vote, revealVotes, resetRound, statusMessage, clearStatus } = actions;
   const [copyStatus, setCopyStatus] = useState(t('COPY_LINK'));
@@ -86,53 +89,18 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
   return (
     <div className="min-h-screen p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] text-slate-800 dark:text-slate-100 transition-colors duration-500 animate-fade-in">
       <div className="max-w-7xl mx-auto">
-        
-        {/* Top Navigation */}
-        <header className="flex justify-between items-center py-4 mb-6">
-          <div className="flex items-center space-x-2">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-              <span className="font-heading font-black text-white text-base">P</span>
-            </div>
-            <span className="font-heading font-black text-lg md:text-xl bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">
-              Planning Poker
-            </span>
-          </div>
 
-          <div className="flex items-center space-x-3">
-            {/* Language Picker */}
-            <div className="relative">
-              <button
-                onClick={() => setShowLangMenu(!showLangMenu)}
-                className="p-2.5 px-4 rounded-xl glass-card text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-md hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-1.5 font-heading font-semibold text-sm cursor-pointer"
-                title="Change Language"
-              >
-                {LANGUAGES[lang]}
-                {showLangMenu ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-              </button>
-              {showLangMenu && (
-                <div className="absolute right-0 mt-2 w-40 rounded-xl shadow-2xl glass-card border border-slate-200/50 dark:border-slate-800/50 z-20 overflow-hidden animate-fade-in">
-                  {Object.entries(LANGUAGES).map(([key, name]) => (
-                    <button
-                      key={key}
-                      onClick={() => handleLangSelect(key as Language)}
-                      className={`block w-full text-left px-4 py-2.5 text-sm font-medium hover:bg-gradient-to-r hover:from-indigo-600 hover:to-violet-600 hover:text-white transition-colors duration-150 ${key === lang ? 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-300'}`}
-                    >
-                      {name}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-            {/* Back to Home */}
-            <button
-              onClick={() => setView('home')}
-              className="p-2.5 px-4 rounded-xl glass-card hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-200 shadow-md font-heading font-semibold text-sm hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
-              title={t('BACK_TO_HOME')}
-            >
-              {t('BACK_TO_HOME')}
-            </button>
-          </div>
-        </header>
+        {/* Top Navigation */}
+        <Header
+          theme={theme}
+          toggleTheme={toggleTheme}
+          setView={setView}
+          lang={lang}
+          setLanguage={setLanguage}
+          showLangMenu={showLangMenu}
+          setShowLangMenu={setShowLangMenu}
+          handleLangSelect={handleLangSelect}
+        />
 
         {/* Game Board & Statistics */}
         <div className="glass-panel rounded-[32px] p-6 md:p-8 shadow-2xl mb-8 border border-white/60 dark:border-slate-800/40 relative overflow-hidden">
@@ -150,7 +118,7 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
               <p className="text-xs text-slate-400 dark:text-slate-500">
                 {t('GAME_CREATED_BY')}: <span className="font-semibold text-slate-500 dark:text-slate-400">{game.created_by_name}</span> (<span className="font-mono">{game.created_by_id.substring(0, 8)}...</span>)
               </p>
-              
+
               {game.story_name && (
                 <div className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-500/10 dark:bg-indigo-500/5 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 dark:border-indigo-500/10 rounded-2xl font-heading font-semibold text-sm">
                   <LinkIcon className="w-4 h-4 shrink-0" />
@@ -209,7 +177,7 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
                 {isRevealed && <span className="text-xs text-slate-400 dark:text-slate-500 font-semibold font-heading">points</span>}
               </div>
             </div>
-            
+
             <div className="p-5 rounded-2xl bg-slate-500/5 border border-slate-500/10">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Vote Progress</p>
               <div className="flex items-center justify-between mt-3">
@@ -219,8 +187,8 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
               <div className="h-2.5 w-full bg-slate-200 dark:bg-slate-900 rounded-full mt-3 overflow-hidden border border-slate-200/50 dark:border-slate-800/50">
                 <div
                   className="h-full bg-gradient-to-r from-indigo-50 to-violet-50 shadow-[0_0_8px_rgba(99,102,241,0.5)] transition-all duration-500"
-                  style={{ 
-                    width: `${revealProgress}%`, 
+                  style={{
+                    width: `${revealProgress}%`,
                     backgroundImage: 'linear-gradient(90deg, var(--color-indigo-500) 0%, var(--color-violet-500) 100%)'
                   }}
                 />
@@ -255,7 +223,7 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage }: G
           >
             <LinkIcon className="w-4 h-4 mr-2" /> {copyStatus}
           </button>
-          
+
           <div className="inline-flex items-center px-4 py-2 bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800/40 rounded-xl text-slate-400 font-mono text-[10px] select-all">
             Game ID: <span className="font-semibold text-slate-500 dark:text-slate-400 ml-1.5">{game.id}</span>
           </div>
