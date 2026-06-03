@@ -110,7 +110,7 @@ export const HomePage = ({
 
   return (
     <div className="relative min-h-screen w-full flex flex-col justify-between p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] transition-colors duration-500 isolate">
-      <InteractiveLiquidBackground theme={theme} />
+      {/* <InteractiveLiquidBackground theme={theme} /> */}
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-grow flex flex-col justify-between">
         {/* Top Header */}
         <Header
