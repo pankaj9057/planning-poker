@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Header } from '../components/Header';
+import GoogleAntiGravityBackground from '../components/background';
 import { Link as LinkIcon, Zap, RotateCw, ChevronDown, ChevronUp } from 'lucide-react';
 import type { Game, Player, Language } from '../types';
 import { GameStatus, LANGUAGES } from '../constants';
@@ -87,7 +88,8 @@ export const GameSession = ({ state, actions, setView, t, lang, setLanguage, tog
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] text-slate-800 dark:text-slate-100 transition-colors duration-500 animate-fade-in">
+    <div className="relative min-h-screen p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] text-slate-800 dark:text-slate-100 transition-colors duration-500 animate-fade-in">
+      <GoogleAntiGravityBackground />
       <div className="max-w-7xl mx-auto">
 
         {/* Top Navigation */}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
+import GoogleAntiGravityBackground from '../components/background';
 import { Moon, Sun, Plus, Link, ChevronDown, ChevronUp, Users2, Zap, Languages } from 'lucide-react';
 import type { Language } from '../types';
 import { LANGUAGES } from '../constants';
@@ -108,7 +109,8 @@ export const HomePage = ({
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col justify-between p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] transition-colors duration-500">
+    <div className="relative min-h-screen w-full flex flex-col justify-between p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] transition-colors duration-500">
+      <GoogleAntiGravityBackground />
       <div className="max-w-7xl mx-auto">
         {/* Top Header */}
         <Header
