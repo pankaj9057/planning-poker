@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
-import GoogleAntiGravityBackground from '../components/background';
+import { InteractiveLiquidBackground } from '../components/InteractiveLiquidBackground';
 import { Moon, Sun, Plus, Link, ChevronDown, ChevronUp, Users2, Zap, Languages } from 'lucide-react';
 import type { Language } from '../types';
 import { LANGUAGES } from '../constants';
@@ -109,9 +109,9 @@ export const HomePage = ({
   };
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col justify-between p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] transition-colors duration-500">
-      <GoogleAntiGravityBackground />
-      <div className="max-w-7xl mx-auto">
+    <div className="relative min-h-screen w-full flex flex-col justify-between p-4 md:p-8 bg-gradient-to-tr from-slate-50 via-indigo-50/20 to-purple-50/40 dark:from-[#0b0f19] dark:via-[#131a2e] dark:to-[#0f172a] transition-colors duration-500 isolate">
+      <InteractiveLiquidBackground theme={theme} />
+      <div className="relative z-10 max-w-7xl mx-auto w-full flex-grow flex flex-col justify-between">
         {/* Top Header */}
         <Header
           theme={theme}
@@ -298,35 +298,51 @@ export const HomePage = ({
           </div>
         </main>
 
-        {/* Feature Highlights Grid */}
-        <footer className="w-full max-w-5xl mx-auto mt-8 py-4 border-t border-slate-200/20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left mt-6">
-            <div className="p-4 flex flex-col items-center md:items-start">
-              <div className="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
-                <Users2 className="w-5 h-5" />
+        {/* Feature Highlights Cards */}
+        <section className="mt-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Real-time Collaboration Card */}
+            <div className="glass-card rounded-[24px] p-6 flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+                <Users2 className="w-6 h-6" />
               </div>
-              <h3 className="font-heading font-bold text-slate-800 dark:text-slate-200 text-sm">Real-time Collaboration</h3>
-              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">Instant updates on votes, session statuses, and participant connections.</p>
+              <h3 className="font-heading font-bold text-slate-800 dark:text-slate-200 text-lg mb-2">
+                Real-time Collaboration
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Instant updates on votes, session statuses, and participant connections.
+              </p>
             </div>
-
-            <div className="p-4 flex flex-col items-center md:items-start">
-              <div className="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
-                <Zap className="w-5 h-5" />
+            {/* Rich Interactivity Card */}
+            <div className="glass-card rounded-[24px] p-6 flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+                <Zap className="w-6 h-6" />
               </div>
-              <h3 className="font-heading font-bold text-slate-800 dark:text-slate-200 text-sm">Rich Interactivity</h3>
-              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">3D card flips, subtle shadows, and clean hover transformations for maximum responsiveness.</p>
+              <h3 className="font-heading font-bold text-slate-800 dark:text-slate-200 text-lg mb-2">
+                Rich Interactivity
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                3D card flips, subtle shadows, and clean hover transformations for maximum responsiveness.
+              </p>
             </div>
-
-            <div className="p-4 flex flex-col items-center md:items-start">
-              <div className="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
-                <Languages className="w-5 h-5" />
+            {/* Localization Support Card */}
+            <div className="glass-card rounded-[24px] p-6 flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+                <Languages className="w-6 h-6" />
               </div>
-              <h3 className="font-heading font-bold text-slate-800 dark:text-slate-200 text-sm">Localization Support</h3>
-              <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">Seamlessly toggle between languages to suit global cross-functional development teams.</p>
+              <h3 className="font-heading font-bold text-slate-800 dark:text-slate-200 text-lg mb-2">
+                Localization Support
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Seamlessly toggle between languages to suit global cross‑functional development teams.
+              </p>
             </div>
           </div>
-          <p className="text-center text-[10px] text-slate-400/60 dark:text-slate-600 mt-8">
-            Planning Poker Estimate Tool &copy; {new Date().getFullYear()}. All Rights Reserved.
+        </section>
+        {/* Footer */}
+        <footer className="w-full max-w-5xl mx-auto mt-8 py-4 border-t border-slate-200/20">
+          <p className="text-center text-[10px] text-slate-400/60 dark:text-slate-600">
+            Planning Poker Estimate Tool © {new Date().getFullYear()}. All Rights Reserved.
           </p>
         </footer>
 
